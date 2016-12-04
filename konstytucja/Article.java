@@ -20,15 +20,6 @@ public class Article implements IConstitution {
 		rows.add(row);
 	}
 	
-	public void joinDividedWords()
-	{
-		// usuwa z koñca linii znaki przeniesienia do nowej liniii (-) i ³¹czy³ s³owa w ca³oœæ,
-		// Utworzy now¹ zawartoœæ listy rows.
-	}
-
-	public void deleteDates()
-	{
-	}
 	
 	public String toString()
 	{
