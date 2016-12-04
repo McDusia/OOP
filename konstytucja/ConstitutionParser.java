@@ -106,19 +106,5 @@ public class ConstitutionParser {
 	    	return true;
 	    return false;
 	}
-	public void joinDividedWords()
-	{
-		
-		
-		// usuwa z koñca linii znaki przeniesienia do nowej liniii (-) i ³¹czy³ s³owa w ca³oœæ,
-		// Utworzy now¹ zawartoœæ listy introduction
-		// Nastêpnie zrobi to samo dla wszystkich rozdzia³ów, sekcji i artyku³ów.
-	}
-	
-	public void deleteDates()
-	{
-		
-		
-	}
 	
 }
