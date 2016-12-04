@@ -20,11 +20,11 @@ List <Section> sections;
 		sections.add(s);
 	}
 	
-	public Article GetArticle(int nr)
+	public Article getArticle(int nr)
 	{
 		for(int i=0;i<sections.size();i++)
 		{
-			Article a=sections.get(i).GetArticle(nr);
+			Article a=sections.get(i).getArticle(nr);
 			if (a!=null)
 				return a;
 		}
@@ -33,16 +33,13 @@ List <Section> sections;
 	
 	public String toString()
 	{
-		return "";
-	}
-	public void JoinDividedWords()
-	{
-		// usuwa z koñca linii znaki przeniesienia do nowej liniii (-) i ³¹czy³ s³owa w ca³oœæ,
-		// Utworzy now¹ zawartoœæ listy introduction
-		// Nastêpnie zrobi to samo dla wszystkich rozdzia³ów, sekcji i artyku³ów.
-	}
-	public void DeleteDates()
-	{
+		String wynik = title+"\r";
+		for(int i=0;i<sections.size();i++)
+		{
+			
+			wynik += sections.get(i).toString()+"\r";
+		}
+		return wynik;
 	}
 
 }
