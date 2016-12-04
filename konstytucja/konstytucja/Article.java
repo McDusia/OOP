@@ -15,26 +15,20 @@ public class Article implements IConstitution {
 		this.rows= new ArrayList<> ();
 	}
 	
-	
-	
 	public void addRow (String row)
 	{
 		rows.add(row);
 	}
 	
+	
 	public String toString()
 	{
-		return "";
+		String wynik = title+"\r";
+		int i;
+		for(i=0;i<rows.size()-1;i++)
+		{
+			wynik += rows.get(i).toString()+"\r";
+		}
+		return wynik+rows.get(i).toString();
 	}
-	
-	public void JoinDividedWords()
-	{
-		// usuwa z koñca linii znaki przeniesienia do nowej liniii (-) i ³¹czy³ s³owa w ca³oœæ,
-		// Utworzy now¹ zawartoœæ listy rows.
-	}
-
-	public void DeleteDates()
-	{
-	}
-
-}
+}	
