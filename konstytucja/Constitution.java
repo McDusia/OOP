@@ -36,34 +36,46 @@ public class Constitution implements IConstitution{
 		return null;
 	}
 	
-	public void displayArticle(String articles)
+	public void displayArticle(String articles) throws IllegalArgument
 	{
 		// Need to parse articles string articles may be like "5-10" or "44"
+		try{
+		IllegalArgument ex = new IllegalArgument("niepoprawny argument");
 		if(articles.contains("-"))
 		{
 			String startString[] = articles.split("-");
 			int start = Integer.valueOf(startString[0]);
 			int end = Integer.valueOf(startString[1]);
+			
 			for (int i=start;i<=end;i++)
 			{
-				Article a = getArticle(i);
-				String s=a.toString();
-				System.out.print(s+"\r");
+				if(i<1 || i>243) throw ex; 
+				else{
+					Article a = getArticle(i);
+					String s=a.toString();
+					System.out.print(s+"\r");
+				}
 			}
 		}
 		else
 		{
 			int onlyOne = Integer.valueOf(articles);
+			if(onlyOne<1 || onlyOne>243) throw ex;
+			else{
 			Article a = getArticle(onlyOne);
 			String s=a.toString();
 			System.out.print(s+"\r");
+			}
 		}
+		} catch (NumberFormatException e){System.out.println("ten argument nie jest liczba");}
 		
 	}
 
-	public void displayChapter(String chapterNr)
+	public void displayChapter(String chapterNr) throws IllegalArgument
 	{
 		//13 chapters
+		try{
+			IllegalArgument ex = new IllegalArgument("niepoprawny argument");
 		if(chapterNr.contains("-"))
 		{
 			String startString[] = chapterNr.split("-");
@@ -71,9 +83,12 @@ public class Constitution implements IConstitution{
 			int end = Integer.valueOf(startString[1]);
 			for (int i=start;i<=end;i++)
 			{
-				Chapter c = getChapter(i);
-				String s = c.toString();
-				System.out.print(s);
+				if(i<1 || i>13) throw ex; 
+				else{
+					Chapter c = getChapter(i);
+					String s = c.toString();
+					System.out.print(s);
+				}
 			}
 		}
 		
@@ -89,7 +104,7 @@ public class Constitution implements IConstitution{
 			else System.out.print("W dokumencie \"Konstytucja Rzeczpospolitej Polskiej\" jest 13 rozdzia³ów. \r");
 			
 		}
-			
+		} catch (NumberFormatException e){System.out.println("ten argument nie jest liczba");}
 	}
 	
 }

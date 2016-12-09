@@ -84,10 +84,12 @@ public class ConstitutionParser {
 					writer.write (line);
 				}				
 			} catch (IOException x) {
-			    System.err.println(x);			    
+			    System.err.println("zla nazwa pliku wejsciowego");
+			    System.exit(0);
 			}
 		} catch (IOException e) {
-			System.err.println(e);
+			System.err.println("zla nazwa pliku wyjsciowego");
+			System.exit(0);
 		}
 		return konst;
 	}
