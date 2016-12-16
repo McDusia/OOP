@@ -8,6 +8,7 @@ public class TestArticle {
 
 	@Test
 	public void test() {
+		//test sprawdzaj¹cy poprawnoœæ metody toString z klasy Article
 		Article a = new Article(2,"Art. 2.");
 		a.addRow("Cos testujacego");
 		assertEquals(a.toString(),"Art. 2.\r" + "Cos testujacego" );

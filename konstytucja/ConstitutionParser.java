@@ -1,12 +1,9 @@
 package konstytucja;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,12 +14,9 @@ public class ConstitutionParser {
 	{
 		Constitution konst = new Constitution();
 		Path file = Paths.get(path);
-		Path file2 = Paths.get("C:\\Users\\Madzia\\konst\\wynik.txt");
-		//System.out.println(file.toString());
-		try(OutputStream out = Files.newOutputStream(file2);
-				BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out,"UTF-8")))
-		{		
-			try (InputStream in = Files.newInputStream(file);
+		//Path file2 = Paths.get("C:\\Users\\Madzia\\konst\\wynik.txt");
+
+		try (InputStream in = Files.newInputStream(file);
 					BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"))) {
 				String line = null;
 				String temp = null;
@@ -80,17 +74,13 @@ public class ConstitutionParser {
 						konst.chapters.get(numChapter-1).sections.get(numSection-1).articles.get(numArticle-1).addRow(line);
 					}
 					
-					//System.out.println(line);
-					writer.write (line);
+		
 				}				
 			} catch (IOException x) {
-			    System.err.println("zla nazwa pliku wejsciowego");
+			    System.out.println("zla nazwa pliku wejsciowego");
 			    System.exit(0);
 			}
-		} catch (IOException e) {
-			System.err.println("zla nazwa pliku wyjsciowego");
-			System.exit(0);
-		}
+		
 		return konst;
 	}
 	

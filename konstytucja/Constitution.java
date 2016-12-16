@@ -79,6 +79,7 @@ public class Constitution implements IConstitution{
 		if(chapterNr.contains("-"))
 		{
 			String startString[] = chapterNr.split("-");
+			if(startString.length!=3 && startString.length!=4) throw new IllegalArgument ("z³y format danych wejœciowych");
 			int start = Integer.valueOf(startString[0]);
 			int end = Integer.valueOf(startString[1]);
 			for (int i=start;i<=end;i++)
@@ -104,7 +105,7 @@ public class Constitution implements IConstitution{
 			else System.out.print("W dokumencie \"Konstytucja Rzeczpospolitej Polskiej\" jest 13 rozdzia³ów. \r");
 			
 		}
-		} catch (NumberFormatException e){System.out.println("ten argument nie jest liczba");}
+		} catch (NumberFormatException e){System.out.println("ten argument nie jest liczb¹");}
 	}
 	
 }

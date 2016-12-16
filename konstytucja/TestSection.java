@@ -8,6 +8,7 @@ public class TestSection {
 
 	@Test
 	public void test() {
+		//test sprawdzaj¹cy poprawnoœæ metody getArticle i toString z klasy Section
 		Section s = new Section(2,"RZECZPOSPOLITA");
 		//Article a = new Article(2,"Art. 2.");
 		

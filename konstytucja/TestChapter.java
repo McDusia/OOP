@@ -8,7 +8,7 @@ public class TestChapter {
 
 	@Test
 	public void test() {
-		
+		//test sprawdzaj¹cy poprawnoœæ metody getArticle i toString z klasy Chapter
 		Chapter c = new Chapter(2,"Rozdzial 2");
 		Section s = new Section(1,"RZECZPOSPOLITA");
 		s.addArticle(2,"Art. 2.");
