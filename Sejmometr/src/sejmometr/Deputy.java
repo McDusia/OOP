@@ -1,16 +1,49 @@
-package sejmometr;
+
 
 public class Deputy {
-	public String id;
-	public String dataset;
-	public String url;
-	public String mp_url;
-	public String schema_url;
-	public String global_id;
-	public String slug;
-	public Object score;
-	public DeputyInfo data;
-	public Layers layers;
-	public Aggs Aggs;
-		
+
+    private String id;
+    private String name;
+    private String wydatkiNaNaprawy;
+    int kadencja;
+
+    /*private String dataset;
+    private String url;
+    private String mp_url;
+    private String schema_url;
+    private String global_id;
+    private String slug;
+    private Object score;
+    */
+   // private DeputyInfo data;
+    /*private Layers layers;
+    private Aggs Aggs;
+     */
+
+    public Deputy()
+    {
+        id= "";
+        name="";
+    }
+
+    public void addId(String readedId)
+    {
+        this.id = readedId;
+    }
+    public void addName(String readedName)
+    {
+        this.name = readedName;
+    }
+    public String returnName()
+    {
+        return this.name;
+    }
+    public String returnID()
+    {
+        return this.id;
+    }
+    //DeputyInfo getData(
+    // {)
+//        return data;
+//
 }

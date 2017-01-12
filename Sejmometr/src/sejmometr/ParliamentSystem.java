@@ -1,31 +1,43 @@
-package sejmometr;
-
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ParliamentSystem {
 
-	public static void main (String[] args) {	
+    public static void main (String[] args) throws IllegalArgument{
 
-		/*Opracuj system, który na podstawie argumentów linii poleceñ wyœwietla nastêpuj¹ce informacje (dla okreœlonej kadencji sejmu):
-			suma wydatków pos³a/pos³anki o okreœlonym imieniu i nazwisku
-			wysokoœci wydatków na 'drobne naprawy i remonty biura poselskiego' okreœlonego pos³a/pos³anki
-			œredniej wartoœci sumy wydatków wszystkich pos³ów
-			pos³a/pos³anki, który wykona³ najwiêcej podró¿y zagranicznych
-			pos³a/pos³anki, który najd³u¿ej przebywa³ za granic¹
-			pos³a/pos³anki, który odby³ najdro¿sz¹ podró¿ zagraniczn¹
-			listê wszystkich pos³ów, którzy odwiedzili W³ochy
-			Program powinien obs³ugiwaæ b³êdy oraz zawieraæ testy weryfikuj¹ce poprawnoœæ jego dzia³ania.
+		/*Opracuj system, ktÃ³ry na podstawie argumentÃ³w linii poleceÅ„ wyÅ›wietla nastÄ™pujÄ…ce informacje (dla okreÅ›lonej kadencji sejmu):
+			suma wydatkÃ³w posÅ‚a/posÅ‚anki o okreÅ›lonym imieniu i nazwisku
+			wysokoÅ›ci wydatkÃ³w na 'drobne naprawy i remonty biura poselskiego' okreÅ›lonego posÅ‚a/posÅ‚anki
+			Å›redniej wartoÅ›ci sumy wydatkÃ³w wszystkich posÅ‚Ã³w
+			posÅ‚a/posÅ‚anki, ktÃ³ry wykonaÅ‚ najwiÄ™cej podrÃ³Å¼y zagranicznych
+			posÅ‚a/posÅ‚anki, ktÃ³ry najdÅ‚uÅ¼ej przebywaÅ‚ za granicÄ…
+			posÅ‚a/posÅ‚anki, ktÃ³ry odbyÅ‚ najdroÅ¼szÄ… podrÃ³Å¼ zagranicznÄ…
+			listÄ™ wszystkich posÅ‚Ã³w, ktÃ³rzy odwiedzili WÅ‚ochy
+			Program powinien obsÅ‚ugiwaÄ‡ bÅ‚Ä™dy oraz zawieraÄ‡ testy weryfikujÄ…ce poprawnoÅ›Ä‡ jego dziaÅ‚ania.
 	*/
-		//changeJsonToClasses jakasnazwa = new changeJsonToClasses().change;
-		
-		//if(args[0].equals("VII") //wywo³anie metody z klasy z parametrem 7
-				
-		//if(args[0].equals("VIII") //wywo³anie metody z klasy z parametrem 8	
-		
-			
-		
-		
-	}
+        //ChangeJsonToClasses jakasnazwa = new ChangeJsonToClasses();
+        //jakasnazwa.change();
+        try {
+            if (args.length == 0) throw new IllegalArgument("nie podano argumentow");
+            DeputyListMaker a = new DeputyListMaker();
+            a.listMaker("8");
+            //a.listMaker("8");
+            //a.listMaker(args[0]); <- docelowy sposob wywolania
+            if (args.length == 1 || args.length == 2) throw new IllegalArgument("podano za malo argumentow");
+            String id = a.returnIDifElement(args[1], args[2]);
+            if (id == "")
+                throw new IllegalArgument("Nie odnaleziono posla o podanym imieniu i nazwisku, sprawdz czy poprawnie wprowadziles dane");
+            Expenses e = new Expenses(id);
+            BigDecimal d = e.returnOneDeputyTotalExpenses();
+            String s = d.toString();
+            System.out.println(s);
+            //AverageExpenses average = new AverageExpenses(a.returnDeputyList());
+            Trips t = new Trips("12");
+
+        }catch (IllegalArgument ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 }
