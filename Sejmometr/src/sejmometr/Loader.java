@@ -67,16 +67,13 @@ public class Loader{
                 data = new_data;
             }
         } finally {
-            OutputStream out = Files.newOutputStream(file);
-            int i= 0;
+            //OutputStream out = Files.newOutputStream(file);
+            //int i= 0;
             String line;
             //while(i<data.length)
-
             //line = data.toString();
-            out.write(data);
-            i++;
-
-
+            //out.write(data);
+            //i++;
             conn.disconnect();
         }
     }
