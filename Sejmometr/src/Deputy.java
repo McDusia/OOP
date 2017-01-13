@@ -23,6 +23,13 @@ public class Deputy {
     public BigDecimal getLittleRepairs() {
         return littleRepairs;
     }
+    public byte[] getReadedJson(){
+        return readedJson;
+    }
+
+    public byte[] getReadedJsonExpenses(){
+        return readedJsonExpenses;
+    }
 
     public Deputy() {
         id = "";

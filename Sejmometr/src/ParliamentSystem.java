@@ -19,9 +19,15 @@ public class ParliamentSystem {
 	*/
         ArgumentParser p = new ArgumentParser();
         try {
+            if (args.length == 0)
+            {
+                p.PrintInfo();
+                return;
+            }
             p.goodArgs(args);
             DeputyList deputies = new DeputyList();
             deputies.listMaker(args[0]);
+            System.out.println(args[1]);
             switch(args[1]){
                 case "s":
                 case "n":
@@ -30,7 +36,7 @@ public class ParliamentSystem {
                         throw new IllegalArgument("Nie odnaleziono posla o podanym imieniu i nazwisku, sprawdz czy poprawnie wprowadziles dane");
                     dep.loadExpenses();
                     dep.calculateTotalExpenses();
-                    if(args[1]=="s")
+                    if(args[1].equals("s"))
                         System.out.println("Suma wydatków posła "+args[2]+" "+args[3]+ ": "+ dep.OneDeputyTotalExpenses().toString());
                     else
                         System.out.println("Wysokość wydatków na drobne naprawy i remonty biura poselskiego posła "+args[2]+" "+args[3]+ ": "+ dep.getLittleRepairs().toString());
