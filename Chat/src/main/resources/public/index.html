@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang = "pl">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WebsSockets</title>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+
+</head>
+<body>
+
+
+    <div id="getName" >
+    Podaj swoje imię<br>
+        <input id="enterWindow">
+    </div>
+
+
+
+    <div id="canals" style = "display: none;">
+        <div><button id="newCanal">Utwórz nowy kanał</button><br></div>
+        <div>Dostępne kanały<br></div>
+        <p>
+        <div><button id="chooseChatbot">chatbot</button><br></div>
+        <div id="canalList" align = "left"> <!-- Built by JS --> </div>
+        </p>
+    </div>
+
+
+
+    <div id="canal" style = "display: none;">
+        <div id="canalNumber"></div><br>
+        <div id="chatControls">
+            <input id="message" placeholder="Type your message">
+            <button id="send">Send</button>
+        </div>
+        <ul id="userlist"> <!-- Built by JS --> </ul>
+        <button id="leaveCanal">Opuść kanał</button>
+        <div id="chat">    <!-- Built by JS --> </div>
+    </div>
+
+    <div id ="chatbot" style = "display: none;" >
+        <table align="left">
+            <tr><td><button id="time">Która godzina?</button></td></tr>
+            <tr><td><button id="weekday">Jaki dziś dzień tygodnia?</button></td></tr>
+            <tr><td><button id="weather">Jaka jest pogoda w Krakowie?</button></td></tr>
+            <tr><td><button id="leaveChatbot">Opuść kanał</button></td></tr>
+            <tr>
+                <td>
+        <div id = "responseTime" style = "display: none;"></div>
+        <div id = "responseWeekday" style = "display: none;"></div>
+        <div id = "responseWeather" style = "display: none;"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <script src="websocketDemo.js"></script>
+</body>
+</html>
