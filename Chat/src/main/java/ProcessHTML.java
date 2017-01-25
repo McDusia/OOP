@@ -3,7 +3,7 @@ import spark.Request;
 import java.util.Map;
 
 public class ProcessHTML {
-    public String ProcessRequest(Request req)
+   /* public String ProcessRequest(Request req)
     {
 
         Map<String,String> map=req.cookies();
@@ -11,5 +11,5 @@ public class ProcessHTML {
             System.out.println(key + " - " + map.get(key));
 
         return "Request processed.";
-    }
+    }*/
 }

@@ -86,12 +86,13 @@ function screenMode(mode)
 }
 
 function paintPage(msg) {
+
     var data = JSON.parse(msg.data);
     //insert("chat", data.userMessage);
     var canalList1 = data.canalList;
     var sender = data.sender;
     var message = data.message;
-    //alert("Canal List=" + canalList1);
+
     switch(Mode){
     case 1:
         break;
@@ -99,14 +100,14 @@ function paintPage(msg) {
         displayCanalList(canalList1);
         break;
     case 3:
+        //data.canalList1.forEach(function (user) {
+        //insert("userlist", "<li>" + user + "</li>");
         updateChat(sender,message);
         break;
     case 4:
         updateChatbot(sender,message);
         break;
     }
-    //data.userlist.forEach(function (user) {
-    //    insert("userlist", "<li>" + user + "</li>");
 }
 
 function getCookieValue(a) {
@@ -124,7 +125,13 @@ function sendMessage(message) {
 
 //Update the chat-panel, and the list of connected users
 function updateChat(sender,msg) {
-    addChatMsg(sender,msg);
+    if(msg[0]==0){
+        msg =msg.substring(1);
+        addLeaveCanalInfo(msg);
+    }
+    else{
+        addChatMsg(sender,msg);
+    }
    // insert("chat", msg);
     //id("userlist").innerHTML = "";
     //data.userlist.forEach(function (user) {
@@ -138,6 +145,7 @@ function updateChatbot(sender,msg) {
     id("responseWeather").style.display = 'none';
 
     var Id=null;
+
     switch (sender)
     {
         case "time":
@@ -148,7 +156,7 @@ function updateChatbot(sender,msg) {
         break;
         case "weather":
         Id= id("responseWeather");
-            break;
+        break;
     }
     if (Id!=null)
     {
@@ -175,7 +183,7 @@ function displayCanalList(canalList1)
             for(i=0;i<tab.length;i++)
             {
                 h+="<p align = \"left\"><button align = \"left\" onclick = \"chooseCanal("+tab[i]+")\" id = \"Canal"+tab[i] +"\"> Kanał "+tab[i]+" </button></p>";
-                h+="<BR>";
+                //h+="<BR>";
             }
             id("canalList").innerHTML = h;
         }
@@ -185,10 +193,16 @@ function displayCanalList(canalList1)
 function insert(targetId, message) {
     id(targetId).insertAdjacentHTML("beforeend", message);
 }
+
 function addChatMsg(user, message) {
     var msg = "<span>Użytkownik "+user+" napisał:<BR> "+message+"</span><BR><hr>";
     id("chat").insertAdjacentHTML("afterbegin", msg);
 }
+function addLeaveCanalInfo(message) {
+    var msg = "<span>"+message+"</span><BR><hr>";
+    id("chat").insertAdjacentHTML("afterbegin", msg);
+}
+
 //Helper function for selecting element by id
 function id(id) {
     return document.getElementById(id);

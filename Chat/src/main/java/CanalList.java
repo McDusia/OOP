@@ -1,11 +1,8 @@
 import org.eclipse.jetty.websocket.api.Session;
-import org.json.JSONObject;
 import java.net.HttpCookie;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 public class CanalList {
-// http://sparkjava.com/documentation.html
 
     private Map<Session, String> usersBeyondCanal = new ConcurrentHashMap<>();
     private Map<Integer, Canal> canalList = new ConcurrentHashMap<>();
@@ -22,6 +19,15 @@ public class CanalList {
     public Map<Session, String> getUsersBeyondCanal(){
         return usersBeyondCanal;
     }*/
+    public boolean isEmpty()
+    {
+        for (Map.Entry<Integer, Canal> entry : canalList.entrySet()) {
+            Canal c = entry.getValue();
+            if(!c.isEmpty())
+                return false;
+        }
+        return true;
+    }
 
     public Canal findCanalForUser(Session s)
     {
@@ -36,9 +42,14 @@ public class CanalList {
     public void leaveCanal(Session s)
     {
         Canal c = findCanalForUser(s);
-        c.removeUserFromCanal(s);
-        usersBeyondCanal.put(s,getUsernameFromSession(s));
+        if(c==null)
+            usersBeyondCanal.remove(s);
+        else {
+            c.removeUserFromCanal(s);
+            usersBeyondCanal.put(s, getUsernameFromSession(s));
+        }
     }
+
     public void addUserToCanal(Session s, int canalNr)
     {
         usersBeyondCanal.remove(s);
@@ -60,7 +71,6 @@ public class CanalList {
         }
         return userName;
     }
-
 
     public String composeCanalsNumbers()
     {
@@ -96,8 +106,7 @@ public class CanalList {
 
     public void sendCanalNumbers() {
         try {
-            String JsonToSend = newJsonString(composeCanalsNumbers(),"","");
-
+            String JsonToSend = new Json().newJsonString(composeCanalsNumbers(),"","");
             usersBeyondCanal.forEach((u,v) ->
                     {
                         try {
@@ -109,19 +118,5 @@ public class CanalList {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
-    public String newJsonString(String a, String b, String c)
-    {
-        try {
-            return String.valueOf(new JSONObject()
-                    .put("canalList", a)
-                    .put("sender", b)
-                    .put("message", c));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 }

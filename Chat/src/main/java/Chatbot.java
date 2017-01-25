@@ -6,12 +6,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import static java.lang.StrictMath.round;
 
-/**
- * Created by Madzia on 2017-01-24.
- */
 public class Chatbot {
 
 
@@ -19,7 +15,6 @@ public class Chatbot {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         String time=timeFormat.format(calendar.getTime());
-        //System.out.println(timeFormat.format(calendar.getTime()));
         return time;
     }
 
@@ -57,24 +52,25 @@ public class Chatbot {
 
     public String getWeatherInfo() {
 
-        String res;
+        String info1,info2,info3;
         try {
 
             String url = "http://api.openweathermap.org/data/2.5/weather?q=Cracow&APPID=fe0ab36b6bc2629a60f4addd5988bed7";
             String readedJson = read(url);
             JSONObject j = new JSONObject(readedJson);
+            Json json = new Json();
             String weather =j.getJSONArray("weather").getJSONObject(0).getString("description");
-            res="\n Pogoda w Krakowie (ang): "+weather+ "\n";
+            info1=" Kraków: "+weather+", ";
             double temp =j.getJSONObject("main").getDouble("temp");
             temp=temp-273;
             temp *=100;
             temp = round(temp);
             temp/=100;
             weather=String.valueOf(temp);
-            res+="\n Temperatura "+weather+" stopni Celcjusza \n";
+            info2="Temp. "+weather+" st. C, ";
             weather= String.valueOf(j.getJSONObject("main").getDouble("pressure"))+"";
-            res+="\n Ciśnienie wynosi "+weather+" hPa";
-
+            info3="Ciśnienie: "+weather+" hPa";
+            String res = info1 + info2 +info3;
             return res;
 
         } catch(JSONException e) {

@@ -1,7 +1,5 @@
 import org.eclipse.jetty.websocket.api.*;
 import org.eclipse.jetty.websocket.api.annotations.*;
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.io.IOException;
 import java.net.HttpCookie;
 
@@ -11,26 +9,31 @@ import java.net.HttpCookie;
 public class ChatWebSocketHandler {
     private String sender, msg;
     private ChatSystem chat;
-    public ChatWebSocketHandler()
-    {
-        chat = new ChatSystem();
-    }
 
     @OnWebSocketConnect
     public void onConnect(Session user) throws Exception {
-        //String username = "User" + Canal.nextUserNumber++;
-        HttpCookie cookie1 = new HttpCookie("PierszeCiastko", "1,2,3");//cl.getList().toString());
-        user.getUpgradeRequest().getCookies().add(cookie1);
-        //CanalList.userUsernameMap.put(user, username);
-        //CanalList.messageToNew(user);
-        //CanalList.broadcastMessage(sender = "Server", msg = (username + " joined the chat"));
+
+        if(chat==null)
+            chat = new ChatSystem();
     }
 
     @OnWebSocketClose
     public void onClose(Session user, int statusCode, String reason) {
-        //String username = Canal.userUsernameMap.get(user);
-        //Canal.userUsernameMap.remove(user);
-        //Canal.broadcastMessage(sender = "Server", msg = (username + " left the chat"));
+        //usunac z listy z odpowiedniego kanału, albo z listy użtkowników "pozakanałowych"
+
+        String canalNumbers = chat.getCanalList().composeCanalsNumbers();
+        Canal c = chat.getCanalList().findCanalForUser(user);
+        if(c!=null ) {
+
+            //String s = Character.toString((char)0);
+            String s = String.valueOf(0);
+            String sender = c.getuserUsernameMap().get(user);
+
+            chat.getCanalList().leaveCanal(user);
+            if(!chat.getCanalList().isEmpty())
+            c.msgLeaveCanal(canalNumbers, sender, s+"Użytkownik " + sender + " zakończył sesję.");
+        }
+        chat.getCanalList().leaveCanal(user);
     }
 
     @OnWebSocketMessage
@@ -42,9 +45,9 @@ public class ChatWebSocketHandler {
                 HttpCookie cookie = new HttpCookie("userName", message);
                 user.getUpgradeRequest().getCookies().add(cookie);
                 chat.getCanalList().adduserBeyondCanal(user, message);
-                chat.getCanalList().sendCanalNumbers();
-                //ChatSystem.list.composeCanalsNumbers();
                 //trzeba mu wysłać listę kanałów
+                chat.getCanalList().sendCanalNumbers();
+
                 break;
             case 2:
                 //użytkownik chce utworzyć nowy kanał
@@ -86,7 +89,9 @@ public class ChatWebSocketHandler {
                         response = bot.getWeatherInfo();
                         break;
                 }
-                String JsonToSend = chat.getCanalList().newJsonString(canalNumbers2,question,response);
+                Json j = new Json();
+                String JsonToSend = j.newJsonString(canalNumbers2,question,response);
+
                 try {
                     user.getRemote().sendString(JsonToSend);
                 }catch (IOException e)

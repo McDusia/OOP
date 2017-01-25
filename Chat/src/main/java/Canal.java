@@ -1,12 +1,6 @@
 import org.eclipse.jetty.websocket.api.Session;
-import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import static j2html.TagCreator.*;
-import static j2html.TagCreator.span;
 
 public class Canal {
 
@@ -22,6 +16,9 @@ public class Canal {
     public boolean isUserInCanal(Session s)
     {
       return userUsernameMap.containsKey(s);
+    }
+    public boolean isEmpty(){
+        return userUsernameMap.isEmpty();
     }
 
     public void removeUserFromCanal(Session s)
@@ -40,24 +37,21 @@ public class Canal {
     public void broadcastMessage(String canalNumbers, String sender, String message) {
         userUsernameMap.keySet().stream().filter(Session::isOpen).forEach(session -> {
             try {
-                session.getRemote().sendString(newJsonString(canalNumbers,sender,message));
+                Json j = new Json();
+                session.getRemote().sendString(j.newJsonString(canalNumbers,sender,message));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
     }
-
-    private String newJsonString(String a, String b, String c)
-    {
-        try {
-            return String.valueOf(new JSONObject()
-                    .put("canalList", a)
-                    .put("sender", b)
-                    .put("message", c));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
+    public void msgLeaveCanal(String canalNumbers, String sender,String message) {
+        userUsernameMap.keySet().stream().filter(Session::isOpen).forEach(session -> {
+            try {
+                Json j = new Json();
+                session.getRemote().sendString(j.newJsonString(canalNumbers,sender,message));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
-
 }

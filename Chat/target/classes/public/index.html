@@ -18,41 +18,44 @@
 
 
     <div id="canals" style = "display: none;">
-        <div><button id="newCanal">Utwórz nowy kanał</button><br></div>
-        <div>Dostępne kanały<br></div>
+        <div><button id="newCanal" align = "left">Utwórz nowy kanał</button></div>
+        <br>
+        <div align = "left">Dostępne kanały: <br></div>
         <p>
-        <div><button id="chooseChatbot">chatbot</button><br></div>
+        <div><button id="chooseChatbot" align = "left">chatbot</button><br></div>
         <div id="canalList" align = "left"> <!-- Built by JS --> </div>
         </p>
     </div>
-
 
 
     <div id="canal" style = "display: none;">
         <div id="canalNumber"></div><br>
         <div id="chatControls">
             <input id="message" placeholder="Type your message">
-            <button id="send">Send</button>
+            <button id="send" align = "right">Send</button>
         </div>
         <ul id="userlist"> <!-- Built by JS --> </ul>
-        <button id="leaveCanal">Opuść kanał</button>
+        <br>
+        <button id="leaveCanal" align = "right">Opuść kanał</button>
+
         <div id="chat">    <!-- Built by JS --> </div>
     </div>
 
     <div id ="chatbot" style = "display: none;" >
-        <table align="left">
-            <tr><td><button id="time">Która godzina?</button></td></tr>
-            <tr><td><button id="weekday">Jaki dziś dzień tygodnia?</button></td></tr>
-            <tr><td><button id="weather">Jaka jest pogoda w Krakowie?</button></td></tr>
-            <tr><td><button id="leaveChatbot">Opuść kanał</button></td></tr>
-            <tr>
-                <td>
-        <div id = "responseTime" style = "display: none;"></div>
-        <div id = "responseWeekday" style = "display: none;"></div>
-        <div id = "responseWeather" style = "display: none;"></div>
-                </td>
-            </tr>
+        <table align="centre">
+            <tr><td><button id="time" align = "left">Która godzina?</button></td></tr>
+            <tr><td><button id="weekday" align = "left">Jaki dziś dzień tygodnia?</button></td></tr>
+            <tr><td><button id="weather" align = "left">Jaka jest pogoda w Krakowie?</button></td></tr>
+            <tr><td><button id="leaveChatbot" align = "left">Opuść kanał</button></td></tr>
+
         </table>
+        <br><br>
+        <table width = "500">
+            <tr><td><div id = "responseTime" align = "centre" style = "display: none;"></div></td></tr>
+            <tr><td><div id = "responseWeekday" align = "centre" style = "display: none;"></div></td></tr>
+            <tr><td><div id = "responseWeather" align = "centre" style = "display: none;"></div></td></tr>
+        </table>
+
     </div>
 
 
