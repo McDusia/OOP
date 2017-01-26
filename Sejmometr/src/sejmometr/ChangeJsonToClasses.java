@@ -1,3 +1,5 @@
+package sejmometr;
+
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -7,98 +9,84 @@ import java.util.List;
 
 
 public class ChangeJsonToClasses {
+	
+	byte[] readedJson;
+	List <Deputy> deputyList;
+	
+	public ChangeJsonToClasses()
+	{
+		deputyList = new ArrayList<>();
+	}
+	
+	public void change(){
+	
+		try {
+			
+			Loader loaded = new Loader (new URL("https://api-v3.mojepanstwo.pl/dane/poslowie.json?conditions[poslowie.kadencja]=8"));
+			readedJson=loaded.data;
+			
+			DeputyInfo walker;
+			/*"id": "197",
+			"dataset": "poslowie",
+			"url": "https:\/\/api-v3.mojepanstwo.pl\/dane\/poslowie\/197",
+			"mp_url": "https:\/\/mojepanstwo.pl\/dane\/poslowie\/197",
+			"schema_url": "https:\/\/api-v3.mojepanstwo.pl\/schemas\/dane\/poslowie.json",
+			"global_id": "1556698",
+			"slug": "kraczkowski-maks",
+			8."score": null,
+			9."data": {
+			*/
+			boolean pierwsza = false, druga = false, trzecia = false;
+			for(int i=0;i<readedJson.length;i++)
+			{
+				boolean data = false;
+				if(readedJson[i]=='{' && !pierwsza) pierwsza = true;
+				if(readedJson[i]=='{' && pierwsza && !druga) druga = true;
+				if(readedJson[i]=='{' && druga && !trzecia) 
+				{
+					trzecia = true;
+					while(readedJson[i]!=':' && i<readedJson.length)
+						i++;
+					i++; //omitting first "
+					String s ="";
+					
+					while(readedJson[i]!='"' && i< readedJson.length)
+					{	char cos;
+						cos = (char)readedJson[i];
+						StringBuilder cos2 =new StringBuilder().append(cos); 
+						String znak;
+						znak= cos2.toString();
+						s.concat(znak);
+					}	
 
-    byte[] readedJson;
-    private List <Deputy> deputyList;
+					Deputy readed = new Deputy();
+					readed.addId(s);
+					deputyList.add(new Deputy());
+					while(readedJson[i]!=':' && i<readedJson.length)
+						i++;
+					i++; //omitting "
+					while(readedJson[i]!='"' && i< readedJson.length)
+					{	char cos;
+						cos = (char)readedJson[i];
+						StringBuilder cos2 =new StringBuilder().append(cos); 
+						String znak;
+						znak= cos2.toString();
+						s.concat(znak);
+					}	
 
-    public ChangeJsonToClasses()
-    {
-        deputyList = new ArrayList<>();
-    }
-
-    public void changeToDeputyList(Loader loaded){
-
-
-            readedJson=loaded.returnData();
-
-            boolean pierwsza = false, druga = false;
-            String lastID ="";
-            for(int i=0;i<readedJson.length;i++)
-            {
-
-
-                if(readedJson[i]=='{' && druga)
-                {
-                    Deputy readedDeputy = new Deputy();
-                    readedDeputy.addId(lastID);
-                    while(readedJson[i]!=':' && i<readedJson.length)
-                         i++;
-                    i++;
-                    while(readedJson[i]!=':' && i<readedJson.length)
-                        i++;
-                    i+=2; //omitting "
-                    String s="";
-                    while(readedJson[i]!='"' && i< readedJson.length)
-                    {
-                        boolean unicodeSign = false;
-                        char sign;
-                        char c = 'r';
-                        if(readedJson[i]==92)
-                        {
-                            String s2="\\";
-                            i++;
-                            for(int j=0;j<5;j++,i++)
-                            {
-                                StringBuilder temp = new StringBuilder().append((char)readedJson[i]);
-                                s2=s2.concat(temp.toString());
-                            }
-                            //String s3 = "\\u0142";
-
-                            c = (char) Integer.parseInt( s2.substring(2), 16 );
-                            unicodeSign = true;
-                            i--;
-                        }
-
-                        if(!unicodeSign)  sign = (char)readedJson[i];
-                        else sign = c;
-
-                        StringBuilder signSB =new StringBuilder().append(sign);
-                        String signS = signSB.toString();
-                        s=s.concat(signS);
-                        i++;
-                    }
-
-                    readedDeputy.addName(s);
-                    //System.out.println(s);
-                    deputyList.add(readedDeputy);
-
-                    //{"ludzie.id":"186","ludzie.nazwa":"Piotr
-                    druga = false;
-                }
-                if(readedJson[i]=='{' && pierwsza && !druga) {
-                    druga = true;
-                    while(readedJson[i]!=':' && i<readedJson.length)
-                        i++;
-                    i+=2; //omitting first "
-                    String s ="";
-                    //byte b = readedJson[i];
-                    while(readedJson[i]!='"' && i<readedJson.length)
-                    {	char cos;
-                        cos = (char)readedJson[i];
-                        StringBuilder cos2 =new StringBuilder().append(cos);
-                        s=s.concat(cos2.toString());
-                        i++;
-                    }
-                    lastID=s;
-                }
-                if(readedJson[i]=='{' && !pierwsza) pierwsza=true;
-            }
-
-    }
-    public List<Deputy> returnDeputyList()
-    {
-        return this.deputyList;
-    }
-
-
+					
+					//{"ludzie.id":"186","ludzie.nazwa":"Maks Kraczkowski
+				}
+			}
+				
+			
+		} catch (MalformedURLException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	
+	}
 }

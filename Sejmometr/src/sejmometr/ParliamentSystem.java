@@ -1,65 +1,29 @@
+package sejmometr;
+
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ParliamentSystem {
 
-    public static void main(String[] args) throws IllegalArgument, IOException {
+	public static void main (String[] args) {	
 
-		/*Opracuj system, kt√≥ry na podstawie argument√≥w linii polece≈Ñ wy≈õwietla nastƒôpujƒÖce informacje (dla okre≈õlonej kadencji sejmu):
-			+suma wydatk√≥w pos≈Ça/pos≈Çanki o okre≈õlonym imieniu i nazwisku
-			-wysoko≈õci wydatk√≥w na 'drobne naprawy i remonty biura poselskiego' okre≈õlonego pos≈Ça/pos≈Çanki
-			+≈õredniej warto≈õci sumy wydatk√≥w wszystkich pos≈Ç√≥w
-			+pos≈Ça/pos≈Çanki, kt√≥ry wykona≈Ç najwiƒôcej podr√≥≈ºy zagranicznych
-			+pos≈Ça/pos≈Çanki, kt√≥ry najd≈Çu≈ºej przebywa≈Ç za granicƒÖ
-			+pos≈Ça/pos≈Çanki, kt√≥ry odby≈Ç najdro≈ºszƒÖ podr√≥≈º zagranicznƒÖ
-			+listƒô wszystkich pos≈Ç√≥w, kt√≥rzy odwiedzili W≈Çochy
-			Program powinien obs≈Çugiwaƒá b≈Çƒôdy oraz zawieraƒá testy weryfikujƒÖce poprawno≈õƒá jego dzia≈Çania.
+		/*Opracuj system, ktÛry na podstawie argumentÛw linii poleceÒ wyúwietla nastÍpujπce informacje (dla okreúlonej kadencji sejmu):
+			suma wydatkÛw pos≥a/pos≥anki o okreúlonym imieniu i nazwisku
+			wysokoúci wydatkÛw na 'drobne naprawy i remonty biura poselskiego' okreúlonego pos≥a/pos≥anki
+			úredniej wartoúci sumy wydatkÛw wszystkich pos≥Ûw
+			pos≥a/pos≥anki, ktÛry wykona≥ najwiÍcej podrÛøy zagranicznych
+			pos≥a/pos≥anki, ktÛry najd≥uøej przebywa≥ za granicπ
+			pos≥a/pos≥anki, ktÛry odby≥ najdroøszπ podrÛø zagranicznπ
+			listÍ wszystkich pos≥Ûw, ktÛrzy odwiedzili W≥ochy
+			Program powinien obs≥ugiwaÊ b≥Ídy oraz zawieraÊ testy weryfikujπce poprawnoúÊ jego dzia≥ania.
 	*/
-        ArgumentParser p = new ArgumentParser();
-        try {
-            p.goodArgs(args);
-            DeputyList deputies = new DeputyList();
-            deputies.listMaker(args[0]);
-            switch(args[1]){
-                case "s":
-                case "n":
-                    Deputy dep = deputies.returnIDifElement(args[2], args[3]);
-                    if (dep == null)
-                        throw new IllegalArgument("Nie odnaleziono posla o podanym imieniu i nazwisku, sprawdz czy poprawnie wprowadziles dane");
-                    dep.loadExpenses();
-                    dep.calculateTotalExpenses();
-                    if(args[1]=="s")
-                        System.out.println("Suma wydatk√≥w pos≈Ça "+args[2]+" "+args[3]+ ": "+ dep.OneDeputyTotalExpenses().toString());
-                    else
-                        System.out.println("Wysoko≈õƒá wydatk√≥w na drobne naprawy i remonty biura poselskiego pos≈Ça "+args[2]+" "+args[3]+ ": "+ dep.getLittleRepairs().toString());
-                    break;
-                case "a":
-                    System.out.println("Srednie wydatki: " + deputies.AverageExpenses());
-                    break;
-                case "z":
-                    deputies.loadTrips();
-                    System.out.println("Najwiƒôcej podr√≥≈ºy zagranicznych wykona≈Ç(a) : " + deputies.bestTraveller());
-                    break;
-                case "d":
-                    deputies.loadTrips();
-                    System.out.println("Najd≈Çu≈ºej za granicƒÖ przebywa≈Ç(a) : " + deputies.longestTraveller());
-                    break;
-                case "e":
-                    deputies.loadTrips();
-                    System.out.println("Najdro≈ºszƒÖ podr√≥≈º zagranicznƒÖ odby≈Ç(a) : " + deputies.withMostExpensiveTravel());
-                    break;
-                case "w":
-                    deputies.loadTrips();
-                    System.out.println("Pos≈Çowie, kt√≥rzy odwiedzili W≈Çochy: \n");
-                    deputies.printWhoVisitedItaly();
-                    break;
-            }
-        } catch (IllegalArgument ex) {
-            System.out.println(ex.getMessage());
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
+		//changeJsonToClasses jakasnazwa = new changeJsonToClasses().change;
+		
+		//args[0] <- imiÍ i nazwisko pos≥a, ktÛrego informacje program bÍdzie wylicza≥
+			ChangeJsonToClasses lista = new ChangeJsonToClasses();
+			lista.change();
+		
+		
+	}
 }

@@ -12,14 +12,8 @@ public interface ISejmometr {
 	listê wszystkich pos³ów, którzy odwiedzili W³ochy
 	Program powinien obs³ugiwaæ b³êdy oraz zawieraæ testy weryfikuj¹ce poprawnoœæ jego dzia³ania.
 */
-	//lista pos³ów   classes: DaputiesList, DeputyRecord, DeputyData
+	//lista pos³ów   classes: DeputiesList, DeputyRecord, DeputyData
 	//informacje o poszczególnych pos³ach   classes: Deputy, DeputyInfo
-	
-	//------------inne dane z serwisu, których nie wykorzystam w programie:
-	//pobieranie listy posiedzeñ sejmu
-	//pobieranie listy dni posiedzeñ sejmowych
-	//pobieranie wyst¹pieñ sejmowych
-	//pobieranie pe³nych treœci wyst¹pieñ sejmowych
 	
 	//other classes: ParliamentSystem, Loader, ChangeJsonToClasses	
 	
@@ -32,6 +26,5 @@ public interface ISejmometr {
 	Deputy longestAbroad (DeputiesList poslowie);
 	Deputy theMostExpensiveTravel (DeputiesList poslowie);
 	Deputy[] visitItaly (DeputiesList poslowie);
-		
-	
+			
 }
