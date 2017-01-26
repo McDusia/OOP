@@ -1,7 +1,4 @@
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class ParliamentSystem {
 

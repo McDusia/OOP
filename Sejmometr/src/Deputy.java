@@ -7,8 +7,6 @@ public class Deputy {
 
     private String id;
     private String name;
-    private String wydatkiNaNaprawy;
-    int kadencja;
     private int liczba_wyjazdow;
     private byte[] readedJson;  //json z wyjazdami
     private byte[] readedJsonExpenses;
@@ -81,18 +79,12 @@ public class Deputy {
     {
         //"poslowie.liczba_wyjazdow"
         String tab = "poslowie.liczba_wyjazdow";
-        //System.out.println(tab.length());
         int j = 0;
-        //StringBuilder s = new StringBuilder("");
-        //String s2 = "poslowie.liczba_wyjazdow";
-
         while (j < 24 && i < readedJson.length) {
             if (readedJson[i] != tab.charAt(j)) return false;
             i++;
             j++;
-            //s = s.append((char) readedJson[i]);
         }
-        //if((String)s!=s2) return false;
         return true;
     }
 
@@ -169,8 +161,6 @@ public class Deputy {
                     StringBuilder temp = new StringBuilder().append((char)readedJsonExpenses[m]);
                     s2=s2.concat(temp.toString());
                 }
-                //if(!s2.equals("[{\"pola\":["))
-                   // System.out.println("Uwaga! numer: id");
                 i += 10;
 
                 BigDecimal total = new BigDecimal(0);

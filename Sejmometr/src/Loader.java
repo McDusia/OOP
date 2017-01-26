@@ -1,14 +1,9 @@
-
 import java.io.*;
-import java.net.*;
 import java.util.*;
 import java.util.regex.*;
 import java.net.URL;
 import java.nio.file.Path;
-//import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import javax.net.ssl.HttpsURLConnection;
 
@@ -26,8 +21,6 @@ public class Loader{
         HttpsURLConnection conn = null;
         try {
             conn = (HttpsURLConnection)url.openConnection();
-
-            //conn = (HttpURLConnection) url.openConnection();
         } catch (ClassCastException e) {
             throw new IllegalArgumentException("URL protocol must be HTTP.");
         }
@@ -67,13 +60,7 @@ public class Loader{
                 data = new_data;
             }
         } finally {
-            //OutputStream out = Files.newOutputStream(file);
-            //int i= 0;
             String line;
-            //while(i<data.length)
-            //line = data.toString();
-            //out.write(data);
-            //i++;
             conn.disconnect();
         }
     }

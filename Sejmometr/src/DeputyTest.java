@@ -1,7 +1,4 @@
 import org.junit.jupiter.api.Test;
-
-import java.math.BigDecimal;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -20,12 +17,7 @@ public class DeputyTest {
         d.addId("123");
         assertEquals("123",d.returnID());
     }
-    /*public int getLiczbaWyjazdow() throws Exception{
-        Deputy d = new Deputy();
-        //d.liczba_wyjazdow = 123;
-        int liczba = this.liczba_wyjazdow;
-        return liczba;
-    }*/
+
     @Test
     public void OneDeputyTotalExpenses () throws Exception {
         Deputy deputy = new Deputy();
@@ -40,10 +32,6 @@ public class DeputyTest {
         deputy2.addName("Maks Kraczkowski");
         deputy2.loadExpenses();
         deputy2.calculateTotalExpenses();
-        //assertEquals(deputy2.OneDeputyTotalExpenses().toString(),"291868.23");
-        //deputy.loadTravels();
-        //byte[] tab = deputy.getReadedJson();
-        //byte[] tab2 = deputy.getReadedJsonExpenses();
     }
 
 }
