@@ -6,7 +6,6 @@ public class Canal {
 
     private int number;
     private Map<Session, String> userUsernameMap = new ConcurrentHashMap<>();
-    //private int nextUserNumber = 1;
 
     public Canal(int n)
     {

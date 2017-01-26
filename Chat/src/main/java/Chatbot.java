@@ -21,28 +21,28 @@ public class Chatbot {
     public String getDay(){
         Calendar calendar = Calendar.getInstance();
         int day_of_week = calendar.get(Calendar.DAY_OF_WEEK);
-        String day="";
+        String day="Dzisiaj jest ";
         switch(day_of_week){
             case 1:
-                day="Dzisiaj jest niedziela.";
+                day+="niedziela.";
                 break;
             case 2:
-                day="Dzisiaj jest poniedziałek.";
+                day+="poniedziałek.";
                 break;
             case 3:
-                day="Dzisiaj jest wtorek.";
+                day+="wtorek.";
                 break;
             case 4:
-                day="Dzisiaj jest środa.";
+                day+="środa.";
                 break;
             case 5:
-                day="Dzisiaj jest czwartek.";
+                day+="czwartek.";
                 break;
             case 6:
-                day="Dzisiaj jest piątek.";
+                day+="piątek.";
                 break;
             case 7:
-                day="Dzisiaj jest sobota.";
+                day+="sobota.";
                 break;
             default:
                 break;
@@ -58,7 +58,6 @@ public class Chatbot {
             String url = "http://api.openweathermap.org/data/2.5/weather?q=Cracow&APPID=fe0ab36b6bc2629a60f4addd5988bed7";
             String readedJson = read(url);
             JSONObject j = new JSONObject(readedJson);
-            Json json = new Json();
             String weather =j.getJSONArray("weather").getJSONObject(0).getString("description");
             info1=" Kraków: "+weather+", ";
             double temp =j.getJSONObject("main").getDouble("temp");
@@ -80,7 +79,6 @@ public class Chatbot {
         }
         return "";
     }
-
 
     private String read(String urlString) throws Exception {
         URL url = new URL(urlString);

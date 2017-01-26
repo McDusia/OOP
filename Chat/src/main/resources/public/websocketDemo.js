@@ -132,11 +132,6 @@ function updateChat(sender,msg) {
     else{
         addChatMsg(sender,msg);
     }
-   // insert("chat", msg);
-    //id("userlist").innerHTML = "";
-    //data.userlist.forEach(function (user) {
-    //    insert("userlist", "<li>" + user + "</li>");
-    //});
 }
 
 function updateChatbot(sender,msg) {

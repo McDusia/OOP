@@ -20,15 +20,11 @@ public class ChatWebSocketHandler {
     @OnWebSocketClose
     public void onClose(Session user, int statusCode, String reason) {
         //usunac z listy z odpowiedniego kanału, albo z listy użtkowników "pozakanałowych"
-
         String canalNumbers = chat.getCanalList().composeCanalsNumbers();
         Canal c = chat.getCanalList().findCanalForUser(user);
         if(c!=null ) {
-
-            //String s = Character.toString((char)0);
             String s = String.valueOf(0);
             String sender = c.getuserUsernameMap().get(user);
-
             chat.getCanalList().leaveCanal(user);
             if(!chat.getCanalList().isEmpty())
             c.msgLeaveCanal(canalNumbers, sender, s+"Użytkownik " + sender + " zakończył sesję.");
@@ -47,7 +43,6 @@ public class ChatWebSocketHandler {
                 chat.getCanalList().adduserBeyondCanal(user, message);
                 //trzeba mu wysłać listę kanałów
                 chat.getCanalList().sendCanalNumbers();
-
                 break;
             case 2:
                 //użytkownik chce utworzyć nowy kanał

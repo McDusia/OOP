@@ -13,12 +13,7 @@ public class CanalList {
     {
         maxCanal=0;
     }
-    /*public Map<Integer, Canal> getList(){
-        return canalList;
-    }
-    public Map<Session, String> getUsersBeyondCanal(){
-        return usersBeyondCanal;
-    }*/
+
     public boolean isEmpty()
     {
         for (Map.Entry<Integer, Canal> entry : canalList.entrySet()) {
@@ -56,7 +51,6 @@ public class CanalList {
         Canal c = canalList.get(canalNr);
         String userName = getUsernameFromSession(s);
         c.addUserToCanal(s,userName);
-
     }
 
     private String getUsernameFromSession(Session s)
